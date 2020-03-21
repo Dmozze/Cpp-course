@@ -1,8 +1,6 @@
 #include <cstdlib>
 #include <iostream>
-#include <iterator>
 #include <cstring>
-#include <fstream>
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
@@ -41,21 +39,21 @@ int main(int argc, char *argv[]) {
 
             break;
         }
-        for (size_t i = 0; i < bytes_read; i++){ // corasick
-            while (index > 0 && buffer[i] != s[index]){
+        for (size_t i = 0; i < bytes_read; i++) { // corasick
+            while (index > 0 && buffer[i] != s[index]) {
                 index = prf[index - 1];
             }
-            if (buffer[i] == s[index]){
+            if (buffer[i] == s[index]) {
                 index++;
             }
-            if (index == s_len){
+            if (index == s_len) {
                 fclose(f);
-                std::cout<<"true" << std::endl;
+                std::cout << "true" << std::endl;
                 return EXIT_SUCCESS;
             }
         }
     }
     fclose(f);
-    std::cout<<"false" << std::endl;
+    std::cout << "false" << std::endl;
     return EXIT_SUCCESS;
 }
