@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     char *s = argv[1];
-    int s_len = strlen(s);
+    size_t s_len = strlen(s);
     int prf[s_len];
     prf[0] = 0;
     for (int i = 1; i < s_len; ++i) {
@@ -25,7 +25,6 @@ int main(int argc, char *argv[]) {
     }
 
     int index = 0;
-
     while (true) {
         char buffer[8192];
         size_t bytes_read = fread(buffer, sizeof(char), std::size(buffer), f);
