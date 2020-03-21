@@ -9,7 +9,6 @@ int main(int argc, char *argv[]) {
         std::cerr << "usage: " << argv[0] << "<substring> <filename>\n";
         return EXIT_FAILURE;
     }
-    std::cout <<argv[1] << " " << argv[2] << std::endl;
     FILE *f = fopen(argv[2], "r");
     if (!f) {
         perror("fopen failed");
