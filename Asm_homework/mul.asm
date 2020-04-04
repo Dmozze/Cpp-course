@@ -23,18 +23,19 @@ mul_long_long:
 
 		push 			rcx
 
-    	sub     		rsp, 128 * 8
-		mov             rbx, rsp
+    		sub     		rsp, 128 * 8
+		mov             	rbx, rsp
 
-    	call    		set_zero_rbx
+    		call    		set_zero_rbx
 		clc
-.loop:
+
+	.loop:
 		push		rsi
 		push		rbx
 		push		rcx
 
-        xor     	rdx, rdx
-        xor     	r8, r8
+        	xor     	rdx, rdx
+        	xor     	r8, r8
 
 		.inner_loop:
 		    	add     	[rbx], r8
@@ -61,28 +62,28 @@ mul_long_long:
 		pop		rsi     
    	
 		lea     	rdi, [rdi+8]
-        lea     	rbx, [rbx+8]
+        	lea     	rbx, [rbx+8]
 
-        dec     	rcx
-        jnz     	.loop
+        	dec     	rcx
+        	jnz     	.loop
 		
     	mov	   		rbx, rsp
     	add     	rsp, 128 * 8
     	pop			rcx
     	push		rcx
 
-.copy_loop:
+	.copy_loop:
 		mov     	r8, [rbx]
-        mov     	[rdi], r8
+        	mov     	[rdi], r8
 
-        lea     	rbx, [rbx + 8]
-        lea     	rdi, [rdi + 8]
+        	lea     	rbx, [rbx + 8]
+        	lea     	rdi, [rdi + 8]
 
-        dec     	rcx
-    	jnz 		.copy_loop
+        	dec     	rcx
+    		jnz 		.copy_loop
 
     	sub 		rdi, 128 * 8
-		pop			rcx
+	pop			rcx
 
     	ret
 
