@@ -13,7 +13,7 @@ _start:
 		push		rsi
 		mov		rsi, rdi
 		pop		rdi
-                call            add_long_long
+                call            sub_long_long
 
                 call            write_long
 
@@ -22,13 +22,7 @@ _start:
 
                 jmp             exit
 
-; adds two long number
-;    rdi -- address of summand #1 (long number)
-;    rsi -- address of summand #2 (long number)
-;    rcx -- length of long numbers in qwords
-; result:
-;    sum is written to rdi
-add_long_long:
+sub_long_long:
                 push            rdi
                 push            rsi
                 push            rcx
