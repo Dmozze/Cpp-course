@@ -1,22 +1,19 @@
 #include <cstdlib>
 #include <iostream>
-#include <iterator>
 #include <cstring>
-#include <fstream>
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
         std::cerr << "usage: " << argv[0] << "<substring> <filename>\n";
         return EXIT_FAILURE;
     }
-    std::cout <<argv[1] << " " << argv[2] << std::endl;
     FILE *f = fopen(argv[2], "r");
     if (!f) {
         perror("fopen failed");
         return EXIT_FAILURE;
     }
     char *s = argv[1];
-    int s_len = strlen(s);
+    size_t s_len = strlen(s);
     int prf[s_len];
     prf[0] = 0;
     for (int i = 1; i < s_len; ++i) {
@@ -28,7 +25,6 @@ int main(int argc, char *argv[]) {
     }
 
     int index = 0;
-
     while (true) {
         char buffer[8192];
         size_t bytes_read = fread(buffer, sizeof(char), std::size(buffer), f);
@@ -42,21 +38,21 @@ int main(int argc, char *argv[]) {
 
             break;
         }
-        for (size_t i = 0; i < bytes_read; i++){ // corasick
-            while (index > 0 && buffer[i] != s[index]){
+        for (size_t i = 0; i < bytes_read; i++) { // corasick
+            while (index > 0 && buffer[i] != s[index]) {
                 index = prf[index - 1];
             }
-            if (buffer[i] == s[index]){
+            if (buffer[i] == s[index]) {
                 index++;
             }
-            if (index == s_len){
+            if (index == s_len) {
                 fclose(f);
-                std::cout<<"true" << std::endl;
+                std::cout << "true" << std::endl;
                 return EXIT_SUCCESS;
             }
         }
     }
     fclose(f);
-    std::cout<<"false" << std::endl;
+    std::cout << "false" << std::endl;
     return EXIT_SUCCESS;
 }
